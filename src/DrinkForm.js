@@ -96,10 +96,14 @@ export class DrinkForm extends React.Component {
                         </thead>
                         <tbody>
                             {this.state.rows.map((row) => (
+                               
                                 <tr key={row.drinkName}>
                                     <td>{row.drinkName}</td>
                                     <td>{parseFloat(row.drinkPrice).toFixed(2)}</td>
                                     <td>{row.drinkCalories}</td>
+                                    <div className="removeIcon">
+                                        <i className="fa fa-times fa-lg"></i>
+                                    </div>
                                 </tr>
                             ))}
                         </tbody>

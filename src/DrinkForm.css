@@ -1,14 +1,21 @@
 
 
-th {
+th, td, i {
     padding: 15px;
     text-align: left;
 }
 
-td {
-    padding: 15px;
-    text-align: left;
+i {
+    
+    color: #af0000;
 }
+
+.removeIcon {
+    border-radius: 10px;
+    background-color: #e5e5e5;
+    cursor: pointer;
+}
+
 
 .DrinkForm div {
     padding: 15px;
