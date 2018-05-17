@@ -1,5 +1,17 @@
 import React from 'react';
 import './DrinkForm.css';
+
+
+function clearFields() {
+    let name = document.getElementById("drinkFormName");
+    let price = document.getElementById("drinkFormPrice");
+    let calories = document.getElementById("drinkFormCalories");
+
+    name.value = '';
+    price.value = '';
+    calories.value = '';
+}
+
 export class DrinkForm extends React.Component {
 
     constructor(props) {
@@ -51,7 +63,10 @@ export class DrinkForm extends React.Component {
         let newDrink = this.state.newDrink;
         this.state.rows.push(newDrink);
         let newState = this.state.rows;
-        this.setState({ rows: newState, newDrink: emptyDrink});
+        this.setState({ rows: newState, newDrink: emptyDrink });
+
+        { clearFields() };
+        
     }
 
     handleNameChange(event) {
@@ -93,15 +108,15 @@ export class DrinkForm extends React.Component {
                 <div className="DrinkForm">
                     <div>
                         <label htmlFor="Drink">Drink Name </label>
-                        <input type="text" name="Drink"  onChange={this.handleNameChange} />
+                        <input type="text" name="Drink" id="drinkFormName"  onChange={this.handleNameChange} />
                     </div>
                     <div>
                         <label htmlFor="Price">Drink Price </label>
-                        <input type="text" name="Price"  onChange={this.handlePriceChange} />
+                        <input type="text" name="Price" id="drinkFormPrice"  onChange={this.handlePriceChange} />
                     </div>
                     <div>
                         <label htmlFor="Calories">Drink Calories </label>
-                        <input type="text" name="Calories" onChange={this.handleCaloriesChange} />
+                        <input type="text" name="Calories" id="drinkFormCalories" onChange={this.handleCaloriesChange} />
                     </div>
                     <div>
                         <input onClick={this.addDrink} type="button" value="Add Drink" />
