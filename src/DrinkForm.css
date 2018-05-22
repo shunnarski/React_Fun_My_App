@@ -10,17 +10,22 @@ i {
     color: #af0000;
 }
 
-.removeIcon {
+.removeIcon{
     border-radius: 10px;
-    background-color: #e5e5e5;
+   
     cursor: pointer;
 }
+
+    .removeIcon:hover {
+        background-color: #f2f2f2;
+    }
 
 
 .DrinkForm div {
     padding: 15px;
     text-align: left;
 }
+
 
 input, label {
     display:block;

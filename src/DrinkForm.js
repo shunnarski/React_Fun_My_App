@@ -1,5 +1,6 @@
 import React from 'react';
 import './DrinkForm.css';
+import { DrinkInformation } from  './DrinkInformation.js'
 
 
 function clearFields() {
@@ -14,105 +15,100 @@ function clearFields() {
 
 export class DrinkForm extends React.Component {
 
+    /* Constructor is called when a DrinkForm element is called, set the state here */
     constructor(props) {
         super(props);
 
-        this.state = { rows: [], newDrink: {} }
+        this.state = {
+           rows: [], newDrink: {}
+        }
 
         let drink1 = {
             drinkName: "Lemonade",
             drinkPrice: 3.45,
-            drinkCalories: 100
+            drinkCalories: 100,
+            id: 0,
         };
 
         let drink2 = {
             drinkName: "Pink Lemonade",
             drinkPrice: 3.90,
-            drinkCalories: 120
+            drinkCalories: 120,
+            id: 1,
         };
 
         let drink3 = {
             drinkName: "Iced Tea",
             drinkPrice: 4.00,
-            drinkCalories: 150
+            drinkCalories: 150,
+            id: 2,
         };
 
         this.state.rows.push(drink1);
         this.state.rows.push(drink2);
         this.state.rows.push(drink3);
+
         this.state.newDrink = {
             drinkName: "",
             drinkPrice: "",
-            drinkCalories: ""
+            drinkCalories: "",
+            id: 3,
         };
 
-
+        /* Function binds */ 
         this.addDrink = this.addDrink.bind(this);
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handlePriceChange = this.handlePriceChange.bind(this);
-        this.handleCaloriesChange = this.handleCaloriesChange.bind(this);
+        this.removeItem = this.removeItem.bind(this);
     }
 
+    /* Adds a drink from the form into the lists */
     addDrink() {
-        let emptyDrink = {
-            drinkName: "",
-            drinkPrice: "",
-            drinkCalories: ""
-        };
 
-        let newDrink = this.state.newDrink;
-        this.state.rows.push(newDrink);
-        let newState = this.state.rows;
-        this.setState({ rows: newState, newDrink: emptyDrink });
+        let drinkName = document.getElementById("drinkFormName");
+        let drinkPrice = document.getElementById("drinkFormPrice");
+        let drinkCalories = document.getElementById("drinkFormCalories");
 
-        { clearFields() };
-        
+        var drink = {
+            drinkName: drinkName.value,
+            drinkPrice: drinkPrice.value,
+            drinkCalories: drinkCalories.value,
+            id: this.state.newDrink.id
+        }
+
+        var rows = this.state.rows;
+        rows.push(drink);
+
+
+        let newMaxID = this.state.newDrink.id + 1;
+
+        var emptyDrink = {
+            drinkName: '',
+            drinkPrice: '',
+            drinkCalories: '',
+            id: newMaxID
+        }
+      
+        this.setState({ rows: rows, newDrink: emptyDrink });
+
+        clearFields();   
     }
 
-    handleNameChange(event) {
-        this.state.newDrink.drinkName = event.target.value;
-    }
+    removeItem(event) {
+        var rows = this.state.rows;
+        let rowToDelete = event.target.id;
+        console.log(rowToDelete);
+        rows.splice(rowToDelete, 1);
 
-    handlePriceChange(event) {
-        this.state.newDrink.drinkPrice = event.target.value;
+        this.setState({ rows: rows });
     }
-
-    handleCaloriesChange(event) {
-        this.state.newDrink.drinkCalories = event.target.value;
-    }
-
 
     render() {
         return (
             <div>
-                <div>
-                    <table >
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Calories</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.rows.map((row) => (
-                               
-                                <tr key={row.drinkName}>
-                                    <td>{row.drinkName}</td>
-                                    <td>{parseFloat(row.drinkPrice).toFixed(2)}</td>
-                                    <td>{row.drinkCalories}</td>
-                                    <div className="removeIcon">
-                                        <i className="fa fa-times fa-lg"></i>
-                                    </div>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table >
-                </div>
+                <DrinkInformation rows={this.state.rows} removeItem={this.removeItem} />
                 <div className="DrinkForm">
                     <div>
                         <label htmlFor="Drink">Drink Name </label>
-                        <input type="text" name="Drink" id="drinkFormName"  onChange={this.handleNameChange} />
+                        <input type="text" name="Drink" id="drinkFormName" onChange={this.handleNameChange} />
                     </div>
                     <div>
                         <label htmlFor="Price">Drink Price </label>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { DrinkForm } from './DrinkForm';
+import { DrinkStand } from './DrinkStand.js';
 
 class App extends Component {
   render() {
@@ -9,9 +9,9 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">React Fun</h1>
+          <h1 className="App-title">Drink Stand</h1>
         </header>
-        <DrinkForm />
+        <DrinkStand />
 
       </div>
     );
